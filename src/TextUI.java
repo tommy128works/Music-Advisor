@@ -13,9 +13,6 @@ public class TextUI {
 
         // loop until program ends
         while (true) {
-            // receive user input
-            // process user input
-            // output result
             String request = this.inputRequest();
             this.processRequest(request);
             if (request.equals("exit")) {
@@ -30,6 +27,20 @@ public class TextUI {
     }
 
     public void processRequest(String request) {
+        if (request.equals("exit")) {
+            System.out.println("---GOODBYE!---");
+            return;
+        } else if (!this.service.getIsAuthorized()) {
+            if (request.equals("auth")) {
+                this.service.setIsAuthorized(true);
+                System.out.println("https://accounts.spotify.com/authorize?client_id=0e7c212c5dce45fb91dd4dc33be57b30&redirect_uri=https://localhost:8080&response_type=code");
+                System.out.println("---SUCCESS---");
+            } else {
+                System.out.println("Please, provide access for application.");
+            }
+            return;
+        }
+
         // future - these cases should call a service method to process it
         switch (request) {
             case "new":
@@ -59,9 +70,6 @@ public class TextUI {
                 System.out.println("Rage Beats");
                 System.out.println("Arab Mood Booster");
                 System.out.println("Sunday Stroll");
-                break;
-            case "exit":
-                System.out.println("---GOODBYE!---");
                 break;
             default:
                 System.out.println("No cases found");

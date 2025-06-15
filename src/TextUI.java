@@ -1,15 +1,19 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class TextUI {
     private final Scanner scanner;
     private final AppService service;
+    private final TestServer server;
 
     public TextUI(AppService service) {
         this.scanner = new Scanner(System.in);
         this.service = service;
+        this.server = new TestServer();
     }
 
     public void start() {
+        this.server.start();
 
         // loop until program ends
         while (true) {

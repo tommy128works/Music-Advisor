@@ -5,15 +5,20 @@ public class TextUI {
     private final Scanner scanner;
     private final AppService service;
     private final TestServer server;
+    private final TestClient client;
 
     public TextUI(AppService service) {
         this.scanner = new Scanner(System.in);
         this.service = service;
         this.server = new TestServer();
+        this.client = new TestClient();
     }
 
     public void start() {
         this.server.start();
+        this.client.sendGETRequestTest();
+//        this.server.stop();
+
 
         // loop until program ends
         while (true) {

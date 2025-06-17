@@ -4,19 +4,23 @@ import java.util.Scanner;
 public class TextUI {
     private final Scanner scanner;
     private final AppService service;
-    private final TestServer server;
-    private final TestClient client;
+//    private final TestServer server;
+//    private final TestClient client;
+    private final AuthServer server;
+    private final AuthClient client;
 
     public TextUI(AppService service) {
         this.scanner = new Scanner(System.in);
         this.service = service;
-        this.server = new TestServer();
-        this.client = new TestClient();
+//        this.server = new TestServer();
+//        this.client = new TestClient();
+        this.server = new AuthServer();
+        this.client = new AuthClient();
     }
 
     public void start() {
-        this.server.start();
-        this.client.sendGETRequestTest();
+//        this.server.start();
+//        this.client.sendGETRequestTest();
 //        this.server.stop();
 
 
@@ -41,8 +45,12 @@ public class TextUI {
             return;
         } else if (!this.service.getIsAuthorized()) {
             if (request.equals("auth")) {
+                this.server.start();
+
                 this.service.setIsAuthorized(true);
-                System.out.println("https://accounts.spotify.com/authorize?client_id=0e7c212c5dce45fb91dd4dc33be57b30&redirect_uri=https://localhost:8080&response_type=code");
+                System.out.println(this.service.getAuthLink());
+
+
                 System.out.println("---SUCCESS---");
             } else {
                 System.out.println("Please, provide access for application.");

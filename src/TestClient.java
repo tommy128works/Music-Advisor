@@ -5,7 +5,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class TestClient {
-    private HttpClient client;
+    private final HttpClient client;
 
     public TestClient() {
         this.client = HttpClient.newBuilder().build();
